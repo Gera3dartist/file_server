@@ -11,7 +11,7 @@ import db_scripts as db
 
 class Server(object):
 
-    def __init__(self,port=1234, directory=None, db=None):
+    def __init__(self,port=1234, directory=None,):
         self.port = port
         self.dirname = directory
         self.db = db
@@ -137,13 +137,14 @@ def parse_arguments():
         description="server for backup and restore files")
     argparser.add_argument("-d", "--directory", help="File id", default="")
     argparser.add_argument("-p","--port", help="File path ", type=int, default=1234)
-    args = argparser.parse_args()
-    return args
+    return argparser
 
 
 def main():
-    args = parse_arguments()
-    serv = Server()
+    argparser = parse_arguments()
+    args = argparser.parse_args()
+    serv = Server(port=args.port, directory=args.directory)
+
     serv.run_server()
 
 
