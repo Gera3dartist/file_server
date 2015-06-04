@@ -1,0 +1,19 @@
+Use cases for Client:
+
+UC#1 - Backup file(examine backup workflow)
+    TestCase #0
+      Validate request format for each workflow(backup/restore/list) (3 tescases)
+    TestCase #1
+      Client sends request with new file name and id to the server. Expected: Server responds with readiness for saving file
+    TestCase #2
+      Client sends request with existing file name and id to the server. Expected: Server responds that such file exists
+    TestCase #3
+      Client sends request with file content, name and size, server stores the file. Expected: file size sent and stored file should match
+
+UC#2 - Restore file(examine restoring workflow)
+  TestCase #1
+    Client requests file by correct id Expected: server responds, it is ready send file
+    
+  
+  
+  
