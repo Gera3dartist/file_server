@@ -1,0 +1,25 @@
+Testing of whole applicatian consift of three tiers, which are:
+1) Client testing
+2) Testing server's API
+3) Testing of database
+
+Strategy for client testing:(System testing)
+
+1. Create test server, which will react on client's request
+2. initialize server instance within setUp() method and destruct in tearDown()
+3. test client's workflow
+
+
+Strategy for server's API testing: (System testing)
+
+1. Mock the client 
+2. Initialize the client on setUp()
+3. Generate/send requests,
+4. Examine server's response in tests
+
+Strategy for db testing:(Unit testing)
+
+1. On test setup create in-memory db
+2. initialiize it with test entries
+3. examine db routines(adding/retrieving data)
+
