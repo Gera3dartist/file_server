@@ -1,0 +1,83 @@
+Use cases for Client:
+
+UC#1 - Backup file.
+    Description: Cliend sends flag 'backup' with file id to the server, server stores file or informs client, in case file        exists
+
+    TestCase #1
+      Client sends request with new file name and id to the server. 
+      Expected: Server responds with message for saving the file
+    TestCase #2
+      Client sends request with existing file name and id to the server. 
+      Expected: Server responds that such file exists
+    TestCase #3
+      Client sends request with file content, name and size, server stores the file. 
+      Expected: file size sent and stored file should match
+
+UC#2 - Restore file
+    Description: Cliend sends flag 'restore' with file id  server sends requested file, in case it exists or inform user, if                  it not
+    TestCase #1
+        Client requests file by correct id, server responds, it is ready send file, client saves the file.
+        Expected: size of recived file equal with those on server.
+    TestCase #2
+        Client requests file by non-existing id. 
+        Expected: server server informs user id not exists
+    TestCase #3
+        Client requests file for storing with certain ID, stores file.
+        Then request repeated for the same ID, with specified 'owerride' flag
+        Expected: no new file get created, file created by first request get overriden
+    TestCase #4
+        Client attempts to send unexpected input. 
+        Expected: Exception raised in case input validation failed
+
+UC#3 - Delete file
+    Description: Cliend sends flag 'delete' with file id, server removes files from filesystem, and entry from db, or inform                   user, in case id does not exist
+    TestCase #1
+        Client sends flag 'delete' with existing file id, server remove requested file from db and filesystem,
+        sends back status
+        Expected: Requested file get removed from db and fs
+    TestCase #2
+        Client send flag 'delete' with non-existing ID, Server informs, that ID not exists in its db
+        Expected: Certain Exception raised
+        
+UC#4 - Listing storage files
+    Description: Client sends flag 'list' with no argument or ID range, server responds with db entries for requested ID
+    
+    TestCase #1
+        Client sends flag 'list' with no arguments, Server reponds with list all of precreated entries
+        Expected: amount of displayed entries equals amount of precreated
+    
+    TestCase #2
+        Client sends flag 'list' with valid ID range
+        Expected: amount of returned entries equals requested ID ragne
+    TestCase #3
+        Client send flag 'list' with invalid range/input
+        Expected: Exception is raised
+        
+        
+-----------------------------------------------------------------------------
+Additioanal use cases:
+-----------------------------------------------------------------------------
+
+    AUC #1
+    Description: Client sends big files, more than 10 GB
+    Expected: System shouldn't crash
+    
+    AUC #2
+    Description:Client get interrupted upon sending/receiving files.
+    Expected: 
+        - db operation should be rolled back,
+        - partially saved files should be removed
+        - interrupted state recognized by server
+        - server switches to its polling state
+        
+    
+    
+    
+    
+            
+
+    
+    
+  
+  
+  
